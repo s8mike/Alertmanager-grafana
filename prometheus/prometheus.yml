@@ -1,0 +1,51 @@
+# global:
+#   scrape_interval: 15s
+#   evaluation_interval: 15s
+
+# alerting:
+#   alertmanagers:
+#     - static_configs:
+#         - targets:
+#             - "alertmanager:9093"
+
+# rule_files:
+#   - "alert.rules.yml"
+
+# scrape_configs:
+#   - job_name: "prometheus"
+#     static_configs:
+#       - targets: ["localhost:9090"]
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - "alertmanager:9093"
+
+rule_files:
+  - "alert.rules.yml"
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+  - job_name: "fake-target"
+    static_configs:
+      - targets: ["broken-target:1234"]
+
+
+#OPTIONAL ENHANCEMENT
+  # ─────────── Optional: Node Exporter Scrape Config ───────────
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # ─────────── Optional: cAdvisor Scrape Config ───────────
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+

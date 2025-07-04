@@ -1,0 +1,26 @@
+## 🔒 .gitignore
+
+```gitignore
+# Logs
+*.log
+
+# OS-generated
+.DS_Store
+Thumbs.db
+
+# Docker
+**/.docker
+*.pid
+
+# VSCode
+.vscode/
+
+# Python cache (if used)
+__pycache__/
+*.py[cod]
+
+# Grafana Session Data
+grafana/data/
+```
+
+---

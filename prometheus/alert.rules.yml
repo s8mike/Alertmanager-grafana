@@ -1,0 +1,23 @@
+# groups:
+#   - name: example-alerts
+#     rules:
+#       - alert: PrometheusInstanceDown
+#         expr: up == 0
+#         for: 30s
+#         labels:
+#           severity: critical
+#         annotations:
+#           summary: "Instance {{ $labels.instance }} is down"
+#           description: "The Prometheus target {{ $labels.instance }} has been unreachable for more than 30 seconds."
+
+groups:
+  - name: example-alerts
+    rules:
+      - alert: TargetDown
+        expr: up == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Target {{ $labels.instance }} is down"
+          description: "The job {{ $labels.job }} on {{ $labels.instance }} has been unreachable for more than 30 seconds."

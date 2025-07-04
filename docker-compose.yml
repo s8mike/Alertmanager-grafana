@@ -1,0 +1,166 @@
+# version: '3.8'
+
+# services:
+#   prometheus:
+#     image: prom/prometheus:latest
+#     container_name: prometheus
+#     volumes:
+#       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+#       - ./prometheus/alert.rules.yml:/etc/prometheus/alert.rules.yml
+#     ports:
+#       - "9090:9090"
+#     depends_on:
+#       - alertmanager
+
+#   alertmanager:
+#     image: prom/alertmanager:latest
+#     container_name: alertmanager
+#     volumes:
+#       - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+#     ports:
+#       - "9093:9093"
+
+#   grafana:
+#     image: grafana/grafana:latest
+#     container_name: grafana
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       - GF_SECURITY_ADMIN_PASSWORD=admin
+
+
+# #optional enhancement. To be commented out once it works for future use (without a zombie process stopper)
+# version: '3.8'
+
+# services:
+#   prometheus:
+#     image: prom/prometheus:latest
+#     container_name: prometheus
+#     volumes:
+#       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+#       - ./prometheus/alert.rules.yml:/etc/prometheus/alert.rules.yml
+#     ports:
+#       - "9090:9090"
+#     depends_on:
+#       - alertmanager
+#     networks:
+#       - monitoring
+
+#   alertmanager:
+#     image: prom/alertmanager:latest
+#     container_name: alertmanager
+#     volumes:
+#       - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+#     ports:
+#       - "9093:9093"
+#     networks:
+#       - monitoring
+
+#   grafana:
+#     image: grafana/grafana:latest
+#     container_name: grafana
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       - GF_SECURITY_ADMIN_PASSWORD=admin
+#     networks:
+#       - monitoring
+
+#   # ─────────── Optional: Node Exporter (for system metrics) ───────────
+#   node-exporter:
+#     image: prom/node-exporter:latest
+#     container_name: node-exporter
+#     ports:
+#       - "9100:9100"
+#     networks:
+#       - monitoring
+#     restart: unless-stopped
+
+#   # ─────────── Optional: cAdvisor (for container-level metrics) ───────────
+#   cadvisor:
+#     image: gcr.io/cadvisor/cadvisor:latest
+#     container_name: cadvisor
+#     ports:
+#       - "8080:8080"
+#     volumes:
+#       - /:/rootfs:ro
+#       - /var/run:/var/run:ro
+#       - /sys:/sys:ro
+#       - /var/lib/docker/:/var/lib/docker:ro
+#     networks:
+#       - monitoring
+#     restart: unless-stopped
+
+# # Define the shared network
+# networks:
+#   monitoring:
+
+
+# #optional enhancement. To be commented out once it works for future use (with a zombie process stopper)
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    init: true                   # option added to prevent zombie processes(ended but not cleanup)
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/alert.rules.yml:/etc/prometheus/alert.rules.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - alertmanager
+    networks:
+      - monitoring
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    init: true
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    ports:
+      - "9093:9093"
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    init: true
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      - monitoring
+
+  # ─────────── Optional: Node Exporter (for system metrics) ───────────
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    init: true
+    ports:
+      - "9100:9100"
+    networks:
+      - monitoring
+    restart: unless-stopped
+
+  # ─────────── Optional: cAdvisor (for container-level metrics) ───────────
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    init: true
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - monitoring
+    restart: unless-stopped
+
+networks:
+  monitoring:
