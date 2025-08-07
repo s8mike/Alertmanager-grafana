@@ -1,7 +1,5 @@
 # 📊 Alertmanager Integration with Grafana Dashboard
 
-## Ticket Reference: #206
-
 This project sets up a local observability stack to integrate **Prometheus**, **Alertmanager**, and **Grafana** for visualizing alert statuses, silences, and notification flows.
 
 ---
@@ -267,10 +265,6 @@ docker-compose down
 
 ## 👨‍💼 Maintained By
 
-**Webforx Technology (DevOps Team)**
-Project: Observability & Monitoring #141
-Ticket: #206
-
 ---
 
 ## 🔒 .gitignore
@@ -307,12 +301,12 @@ grafana/data/
 # BACK UP README.md. WILL BE DELETED WHEN ABOVE IS CONFIRMED OKAY.
 
 
-<!-- Certainly! Here's the updated README.md snippet with a **Prerequisites / Tools Requirements** section added near the top, before the setup instructions.
+<An updated README.md snippet with a **Prerequisites / Tools Requirements** section added near the top, before the setup instructions.
 
 ---
 
 ```markdown
-# Alertmanager & Grafana Integration — Ticket #206
+# Alertmanager & Grafana Integration
 
 ## Prerequisites / Tools Requirements
 
@@ -505,7 +499,6 @@ Great! Here's the **complete and ready-to-save `README.md`** file for your proje
 ````markdown
 # 📊 Alertmanager Integration with Grafana Dashboard
 
-## Ticket Reference: #206
 This project sets up a local observability stack to integrate **Prometheus**, **Alertmanager**, and **Grafana** for visualizing alert statuses, silences, and notification flows.
 
 ---
@@ -747,33 +740,13 @@ docker-compose down
 
 ---
 
-## 👨‍💻 Maintained By
-
-**Webforx Technology (DevOps Team)**
-Project: Observability & Monitoring #141
-Ticket: #206
-
----
-
 ```
 
 ---
-
-### ✅ What to Do Next
-
-- Copy the above content and save it as `README.md` in the root folder of your project.
-- Let me know if you'd like a downloadable `.md` version — I can generate one for you.
-- Confirm if you'd like to **commit and push this upstream**, and I’ll guide you with a Git command.
-
-Would you like me to generate a downloadable version of `README.md`?
-```
-
 
 # README.md 3 (option 3)
 
 # 📊 Alertmanager Integration with Grafana Dashboard
-
-## Ticket Reference: #206
 
 This project sets up a local observability stack to integrate **Prometheus**, **Alertmanager**, and **Grafana** for visualizing alert statuses, silences, and notification flows.
 
@@ -994,59 +967,3 @@ cadvisor:
 #   ...
 ```
 
-> You may also delete their dashboards from Grafana under **Manage Dashboards**.
-
----
-
-## 📌 Notes
-
-* `docker-compose up -d` starts existing containers.
-* `docker-compose up -d --build` rebuilds containers before starting.
-* If you encounter zombie containers, consider adding `init: true` under affected services in `docker-compose.yml` to enable proper signal handling.
-* All configs are tested on Docker Compose v2.
-* Ideal for **local testing**, learning, or demo use.
-
----
-
-## 🗖️ Clean Up
-
-```bash
-docker-compose down
-```
-
----
-
-## 👨‍💼 Maintained By
-
-**Webforx Technology (DevOps Team)**
-Project: Observability & Monitoring #141
-Ticket: #206
-
----
-
-## 🔒 .gitignore
-
-```gitignore
-# Logs
-*.log
-
-# OS-generated
-.DS_Store
-Thumbs.db
-
-# Docker
-**/.docker
-*.pid
-
-# VSCode
-.vscode/
-
-# Python cache (if used)
-__pycache__/
-*.py[cod]
-
-# Grafana Session Data
-grafana/data/
-```
-
---- -->
